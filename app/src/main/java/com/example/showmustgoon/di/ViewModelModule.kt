@@ -1,6 +1,7 @@
 package com.example.showmustgoon.di
 
 import androidx.lifecycle.ViewModel
+import com.example.showmustgoon.presentation.feature.addnote.AddNoteViewModel
 import com.example.showmustgoon.presentation.feature.home.HomeViewModel
 import dagger.Binds
 import dagger.Module
@@ -13,4 +14,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddNoteViewModel::class)
+    abstract fun bindAddNoteViewModel(viewModel: AddNoteViewModel): ViewModel
 }
