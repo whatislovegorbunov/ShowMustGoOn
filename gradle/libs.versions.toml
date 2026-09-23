@@ -15,6 +15,7 @@ navigationCompose = "2.7.7"
 mockk = "1.13.11"
 turbine = "1.1.0"
 coroutinesTest = "1.8.1"
+room = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +41,10 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

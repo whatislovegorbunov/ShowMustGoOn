@@ -74,7 +74,7 @@ class AddNoteViewModelTest {
     }
 
     @Test
-    fun saveNote_withNonBlankTitle_callsUseCaseAndSetsIsSaved() = runTest(testDispatcher) {
+    fun saveNote_withNonBlankTitle_callsRepositoryAndSetsIsSaved() = runTest(testDispatcher) {
         coEvery { noteRepository.addNote(any(), any()) } returns Result.success(Unit)
         val viewModel = AddNoteViewModel(noteRepository)
         viewModel.onTitleChange("Test Title")
@@ -92,7 +92,7 @@ class AddNoteViewModelTest {
     }
 
     @Test
-    fun saveNote_withBlankTitle_doesNotCallUseCase() = runTest(testDispatcher) {
+    fun saveNote_withBlankTitle_doesNotCallRepository() = runTest(testDispatcher) {
         val viewModel = AddNoteViewModel(noteRepository)
 
         viewModel.saveNote()
@@ -102,7 +102,7 @@ class AddNoteViewModelTest {
     }
 
     @Test
-    fun saveNote_whenUseCaseFails_setsErrorAndDoesNotSetSaved() = runTest(testDispatcher) {
+    fun saveNote_whenRepositoryFails_setsErrorAndDoesNotSetSaved() = runTest(testDispatcher) {
         val errorMessage = "Save failed"
         coEvery { noteRepository.addNote(any(), any()) } returns Result.failure(RuntimeException(errorMessage))
         val viewModel = AddNoteViewModel(noteRepository)

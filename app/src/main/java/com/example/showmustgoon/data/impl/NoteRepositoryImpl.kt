@@ -1,27 +1,33 @@
 package com.example.showmustgoon.data.impl
 
 import com.example.showmustgoon.data.api.NoteRepository
-import com.example.showmustgoon.domain.model.Show
+import com.example.showmustgoon.data.local.NoteDao
+import com.example.showmustgoon.data.local.toDomain
+import com.example.showmustgoon.data.local.toEntity
+import com.example.showmustgoon.domain.model.Note
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.map
 import java.util.UUID
 import javax.inject.Inject
 
-class NoteRepositoryImpl @Inject constructor() : NoteRepository {
+class NoteRepositoryImpl @Inject constructor(
+    private val noteDao: NoteDao
+) : NoteRepository {
 
-    private val notes = MutableStateFlow<List<Show>>(emptyList())
-
-    override fun observeNotes(): Flow<List<Show>> = notes.asStateFlow()
+    override fun observeNotes(): Flow<List<Note>> =
+        noteDao.observeAll().map { entities -> entities.map { it.toDomain() } }
 
     override suspend fun addNote(title: String, content: String): Result<Unit> = runCatching {
-        val note = Show(
+        val note = Note(
             id = UUID.randomUUID().toString(),
             title = title,
             content = content,
             createdAt = System.currentTimeMillis()
         )
-        notes.update { current -> listOf(note) + current }
+        noteDao.insert(note.toEntity())
+    }
+
+    override suspend fun deleteNote(id: String): Result<Unit> = runCatching {
+        noteDao.deleteById(id)
     }
 }

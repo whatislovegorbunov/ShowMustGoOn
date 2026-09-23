@@ -6,6 +6,8 @@ import com.example.showmustgoon.di.DaggerAppComponent
 
 class ShowMustGoOnApp : Application() {
     val appComponent: AppComponent by lazy {
-        DaggerAppComponent.create()
+        DaggerAppComponent.builder()
+            .context(this)
+            .build()
     }
 }

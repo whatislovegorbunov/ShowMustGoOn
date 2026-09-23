@@ -1,6 +1,6 @@
 package com.example.showmustgoon.domain.model
 
-data class Show(
+data class Note(
     val id: String,
     val title: String,
     val content: String,
