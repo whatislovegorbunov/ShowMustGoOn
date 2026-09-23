@@ -1,7 +1,7 @@
 package com.example.showmustgoon.di
 
-import com.example.showmustgoon.data.repository.ShowRepositoryImpl
-import com.example.showmustgoon.domain.repository.ShowRepository
+import com.example.showmustgoon.data.api.NoteRepository
+import com.example.showmustgoon.data.impl.NoteRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -11,5 +11,5 @@ abstract class AppModule {
 
     @Binds
     @Singleton
-    abstract fun bindShowRepository(impl: ShowRepositoryImpl): ShowRepository
+    abstract fun bindNoteRepository(impl: NoteRepositoryImpl): NoteRepository
 }
